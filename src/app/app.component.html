@@ -1,0 +1,182 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <accordion>
+                <accordion-group [isOpened]="true">
+                    <accordion-heading id="accordion1" (click)="onclicktoggle('accordion1')">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <span id="icon1" class="glyphicon glyphicon-minus"></span> OWS 2018 K-1 Tax Effect
+                            </h2>
+                        </div>
+                    </accordion-heading>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h4>Explore the Potential Tax Effect of investing in an oil drilling partnership.</h4>
+                            </div>
+                            <div class="col-md-3">
+                                <img src="assets/logo.png" width="200px" />
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-5" style="min-height:50px">
+                                        Estimated Taxable Income
+                                    </div>
+                                    <div class="col-md-4" style="min-height:50px">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="Estimated_Taxable_Income_model" min="0" class="form-control" />
+                                            <span class="input-group-addon" style="font-weight:bold">&nbsp;&nbsp;$&nbsp;&nbsp;</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5" style="min-height:50px">
+                                        Filing Status
+                                    </div>
+                                    <div class="col-md-4" style="min-height:50px">
+                                        <select class="form-control" (change)="getSelected($event.target.value)">
+                                            <option value="-1">Select Filing Status</option>
+                                            <option value="0">Single</option>
+                                            <option value="1">Married Filing Jointly</option>
+                                            <option value="2">Married Filing Separately</option>
+                                            <option value="3">Head of Household</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1" style="min-height:50px">
+                                        <button class="btn btn-success" (click)="compare_k1()">SUBMIT</button>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div id="arrowUp" class="col-md-4" style="text-align: center">
+                                        <h3>Your Tax Bracket</h3>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-4">
+                                        <b>
+                                            <h2>{{Tax_Bracket | percent}}</h2>
+                                        </b>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4" *ngIf="pieChartData.length > 1">
+                                <canvas baseChart height="200px" [data]="pieChartData" [options]="pieChartOption" [labels]="pieChartLabels" [colors]="pieChartColor"
+                                    [chartType]="pieChartType"></canvas>
+                            </div>
+                        </div>
+
+                        <hr style="border-top: 1px solid #CDCDCD">
+
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h4 style="text-align:justify">This Tool helps you do two very important things when considering investing in oil and gas
+                                    drilling partnerships that issue K-1 's for tax filing purposes:</h4>
+                                <ol style="padding-top: 10px; margin-left: -25px">
+                                    <li>Compare the effect on your
+                                        <b>After Tax Income</b> with a K-1 write off.</li>
+                                    <li>Estimate the
+                                        <b>Out-of-Pocket Investment Dollars at Risk.</b>
+                                    </li>
+                                </ol>
+                                Simply input an
+                                <b>Investment Amount</b> and
+                                <b>Estimated K-1 Deduction</b>
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-4 round-div">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        Est. Out-of-Pocket Investment Dollars at Risk
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3>
+                                            <b style="color:#9fc1e4">{{Actual_Dollars_At_Risk | currency:'USD' : true : '1.2-2' }}</b>
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        Your Estimated Cost Savings
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="row" style="min-height:50px">
+                                    <div class="col-md-5">
+                                        Investment Amount
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="Investment_Amount_K1_model" min="0" (change)="compare_k2()" class="form-control" />
+                                            <span class="input-group-addon" style="font-weight:bold">&nbsp;&nbsp;$&nbsp;&nbsp;</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="min-height:50px">
+                                    <div class="col-md-5">
+                                        Est. K-1 Deduction
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="k1_deduction_percentage" min="0" max="100" (change)="compare_k2()" class="form-control"
+                                            />
+                                            <span class="input-group-addon" style="font-weight:bold">&nbsp;%&nbsp;</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" style="padding-top: 5px">
+                                        {{ Deduction_K1 | currency:'USD' : true : '1.2-2' }}
+                                    </div>
+                                </div>
+                                <div class="row" style="min-height:50px">
+                                    <div class="col-md-7">
+                                        Est. Adjusted Taxable Income
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{Adjusted_Taxable_Income_K1 | currency:'USD' : true : '1.2-2' }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div id="arrowDown" class="col-md-4" style="text-align: center">
+                                        <h3>Your Adjusted Tax Bracket</h3>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-4">
+                                        <b>
+                                            <h2>{{Tax_Bracket_K1 | percent}}</h2>
+                                        </b>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4" *ngIf="pieChartData1.length > 1">
+                                <canvas baseChart [data]="pieChartData1" [options]="pieChartOption1" [labels]="pieChartLabels1" [colors]="pieChartColor1"
+                                    [chartType]="pieChartType" height="250px"></canvas>
+                            </div>
+                        </div>
+
+                    </div>
+                </accordion-group>
+            </accordion>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
