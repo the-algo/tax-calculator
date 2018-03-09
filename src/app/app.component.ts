@@ -8,8 +8,8 @@ import { Chart } from 'chart.js';
 
 export class AppComponent {
 
-  public pieChartLabels: string[] = ["$0", "$0"];
-  public pieChartLabels1: string[] = ["$0", "$0", "$0", "$0"];
+  //public pieChartLabels: string[] = ["$0", "$0"];
+  //public pieChartLabels1: string[] = ["$0", "$0", "$0", "$0"];
   public pieChartData: number[] = [];
   public pieChartData1: number[] = [];
   public pieChartType: string = 'pie';
@@ -66,6 +66,8 @@ export class AppComponent {
   public panel_visit: number = 0;
 
   public Actual_Dollars_At_Risk: number = 0;
+
+  public costSaving: number = 0;
 
   constructor() {
     this.intializeData();
@@ -190,21 +192,26 @@ export class AppComponent {
   getSelected(selectedValue: string) {
     this.Filing_Status = parseInt(selectedValue);
   }
-
-  commafy(num) {
-    var str = num.toString().split('.');
-    if (str[0].length >= 5) {
-      str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+  /* 
+    commafy(num) {
+      var str = num.toString().split('.');
+      if (str[0].length >= 5) {
+        str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+      }
+      if (str[1] && str[1].length >= 1) {
+        str[1] = str[1].slice(0, 2);
+      }
+  
+      if (!str[1]) {
+        str[1] = '00';
+      }
+      return str.join('.');
     }
-    if (str[1] && str[1].length >= 2) {
-      str[1] = str[1].slice(0, 2);
-    }
-    return str.join('.');
-  }
-
+  
+     */
   // Calculate the K1 with and without K1 value 
   compare_k1() {
-    this.pieChartLabels = [];
+    //this.pieChartLabels = [];
     this.pieChartData.length = 0;
 
     this.Deduction_K1 = this.Investment_Amount_K1_model * 0.75;
@@ -235,10 +242,10 @@ export class AppComponent {
     var per1 = ((this.Adjusted_Net_Income * 100) / this.Adjusted_Taxable_Income).toFixed(2);
     var per2 = ((this.Tax_Liability * 100) / this.Adjusted_Taxable_Income).toFixed(2);
 
-    var val1 = this.commafy(this.Tax_Liability);
-    var val2 = this.commafy(this.Adjusted_Net_Income);
+    //var val1 = this.commafy(this.Tax_Liability);
+    //var val2 = this.commafy(this.Adjusted_Net_Income);
     this.pieChartData.push(parseFloat(per2), parseFloat(per1));
-    this.pieChartLabels.push("$" + val1, "$" + val2)
+    //this.pieChartLabels.push("$" + val1, "$" + val2)
 
 
     var options = {
@@ -259,12 +266,17 @@ export class AppComponent {
             },
        */
       events: false,
+      responsive: true,
+      legend: {
+        display: false,
+      },
       animation: {
         duration: 500,
         easing: "easeOutQuart",
         onComplete: function () {
           var ctx = this.chart.ctx;
-          ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+          Chart.defaults.global.defaultFontSize = 14;
+          ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, 'normal', Chart.defaults.global.defaultFontFamily);
           ctx.textAlign = 'center';
           ctx.textBaseline = 'bottom';
 
@@ -300,7 +312,7 @@ export class AppComponent {
 
   // Calculate the K1 with value
   compare_k2() {
-    this.pieChartLabels1 = [];
+    //this.pieChartLabels1 = [];
     this.pieChartData1.length = 0;
 
     if (this.panel_visit == 1) {
@@ -332,13 +344,17 @@ export class AppComponent {
       var per3 = ((this.Tax_Savings_K1 * 100) / total).toFixed(2);
       var per4 = ((this.Income_Difference * 100) / total).toFixed(2);
 
-      var val1 = this.commafy(this.Income_Difference);
-      var val2 = this.commafy(this.Tax_Savings_K1);
-      var val3 = this.commafy(this.Tax_Liability_K1);
-      var val4 = this.commafy(this.Adjusted_Net_Income_K1);
+      //var val1 = this.commafy(this.Income_Difference);
+      //var val2 = this.commafy(this.Tax_Savings_K1);
+      //var val3 = this.commafy(this.Tax_Liability_K1);
+      //var val4 = this.commafy(this.Adjusted_Net_Income_K1);
 
       this.pieChartData1.push(parseFloat(per4), parseFloat(per3), parseFloat(per2), parseFloat(per1));
-      this.pieChartLabels1.push("$" + val1, "$" + val2, "$" + val3, "$" + val4)
+      //this.pieChartLabels1.push("$" + val1 + "                             ", "$" + val2 + "                             ", "$" + val3 + "                                  ", "$" + val4 + "                                ")
+      //this.pieChartLabels1.push("$" + val1, "$" + val2, "$" + val3, "$" + val4);
+
+      var percent = (100 - ((this.Actual_Dollars_At_Risk * 100) / this.Investment_Amount_K1_model)).toFixed(2)
+      this.costSaving = parseFloat(percent) / 100;
 
       var options = {
         /* 
@@ -357,8 +373,9 @@ export class AppComponent {
                 }
               },
          */
+        responsive: true,
         legend: {
-          position: 'bottom',
+          display: false,
         },
         events: false,
         animation: {
@@ -366,7 +383,8 @@ export class AppComponent {
           easing: "easeOutQuart",
           onComplete: function () {
             var ctx = this.chart.ctx;
-            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+            Chart.defaults.global.defaultFontSize = 14;
+            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, 'normal', Chart.defaults.global.defaultFontFamily);
             ctx.textAlign = 'center';
             ctx.textBaseline = 'bottom';
 
@@ -388,7 +406,7 @@ export class AppComponent {
                 //  ctx.fillStyle = '#444';
                 //}
                 //var percent = String(Math.round(dataset.data[i] / total * 100)) + "%";
-                ctx.fillText(dataset.data[i] + "%", model.x + x, model.y + y + 10);
+                ctx.fillText(dataset.data[i] + "%", model.x + x + 5, model.y + y + 7);
                 // Display percent in another line, line break doesn't work for fillText
                 //ctx.fillText(percent, model.x + x, model.y + y + 15);
               }

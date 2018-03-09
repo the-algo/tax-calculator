@@ -25,8 +25,9 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="row">
-                                    <div class="col-md-5" style="min-height:50px">
+                                    <div class="col-md-5" style="min-height:25px">
                                         Estimated Taxable Income
+                                        <i class="glyphicon glyphicon-question-sign" title=""></i>
                                     </div>
                                     <div class="col-md-4" style="min-height:50px">
                                         <div class="input-group">
@@ -37,8 +38,9 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-5" style="min-height:50px">
+                                    <div class="col-md-5" style="min-height:25px">
                                         Filing Status
+                                        <i class="glyphicon glyphicon-question-sign" title=""></i>
                                     </div>
                                     <div class="col-md-4" style="min-height:50px">
                                         <select class="form-control" (change)="getSelected($event.target.value)">
@@ -55,20 +57,48 @@
                                 </div>
 
                                 <div class="row">
-                                    <div id="arrowUp" class="col-md-4" style="text-align: center">
-                                        <h3>Your Tax Bracket</h3>
+                                    <div id="arrowUp" class="col-md-4 col-xs-8" style="text-align: center">
+                                        <span style="font-size: x-large;">Your Tax Bracket</span>
+                                        <i class="glyphicon glyphicon-question-sign" title=""></i>
                                     </div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-1 col-xs-1"></div>
+                                    <div class="col-md-4 col-xs-2">
                                         <b>
-                                            <h2>{{Tax_Bracket | percent}}</h2>
+                                            <span style="font-size: xx-large;">{{Tax_Bracket | percent}}</span>
                                         </b>
                                     </div>
                                 </div>
                             </div>
+                            <br>
                             <div class="col-md-4" *ngIf="pieChartData.length > 1">
-                                <canvas baseChart height="200px" [data]="pieChartData" [options]="pieChartOption" [labels]="pieChartLabels" [colors]="pieChartColor"
-                                    [chartType]="pieChartType"></canvas>
+                                <div class="row">
+                                    <div class="col-md-7 col-xs-6">
+                                        Est. After Tax Income
+                                        <i class="glyphicon glyphicon-question-sign" title=""></i>
+
+                                    </div>
+                                    <div class="col-md-5 col-xs-6">
+                                        <div class="foo silver"></div>{{ Adjusted_Net_Income | currency:'USD' : true : '1.2-2' }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-7 col-xs-6">
+                                        Est. Tax Liability
+                                        <i class="glyphicon glyphicon-question-sign" title=""></i>
+
+                                    </div>
+                                    <div class="col-md-5 col-xs-6">
+                                        <div class="foo red"></div>{{ Tax_Liability | currency:'USD' : true : '1.2-2' }}
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <canvas baseChart height="175px" [data]="pieChartData" [options]="pieChartOption" [labels]="pieChartLabels" [colors]="pieChartColor"
+                                            [chartType]="pieChartType"></canvas>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -106,6 +136,9 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         Your Estimated Cost Savings
+                                        <span style="color: green; font-size: large; font-weight:bold">
+                                            {{ costSaving | percent }} </span>
+                                        <i class="glyphicon glyphicon-question-sign" title=""></i>
                                     </div>
                                 </div>
                             </div>
@@ -117,10 +150,11 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="row" style="min-height:50px">
-                                    <div class="col-md-5">
+                                    <div class="col-md-5" style="min-height:25px">
                                         Investment Amount
+                                        <i class="glyphicon glyphicon-question-sign" title=""></i>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4" style="min-height:50px">
                                         <div class="input-group">
                                             <input type="number" [(ngModel)]="Investment_Amount_K1_model" min="0" (change)="compare_k2()" class="form-control" />
                                             <span class="input-group-addon" style="font-weight:bold">&nbsp;&nbsp;$&nbsp;&nbsp;</span>
@@ -128,45 +162,89 @@
                                     </div>
                                 </div>
                                 <div class="row" style="min-height:50px">
-                                    <div class="col-md-5">
+                                    <div class="col-md-5" style="min-height:25px">
                                         Est. K-1 Deduction
+                                        <i class="glyphicon glyphicon-question-sign" title=""></i>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-2" style="min-height:35px">
                                         <div class="input-group">
                                             <input type="number" [(ngModel)]="k1_deduction_percentage" min="0" max="100" (change)="compare_k2()" class="form-control"
                                             />
                                             <span class="input-group-addon" style="font-weight:bold">&nbsp;%&nbsp;</span>
                                         </div>
                                     </div>
-                                    <div class="col-md-4" style="padding-top: 5px">
+                                    <div class="col-md-2" style="min-height:50px; padding-top: 5px">
                                         {{ Deduction_K1 | currency:'USD' : true : '1.2-2' }}
                                     </div>
                                 </div>
                                 <div class="row" style="min-height:50px">
-                                    <div class="col-md-7">
+                                    <div class="col-md-7" style="min-height:25px">
                                         Est. Adjusted Taxable Income
+                                        <i class="glyphicon glyphicon-question-sign" title=""></i>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4" style="min-height:50px">
                                         {{Adjusted_Taxable_Income_K1 | currency:'USD' : true : '1.2-2' }}
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div id="arrowDown" class="col-md-4" style="text-align: center">
-                                        <h3>Your Adjusted Tax Bracket</h3>
+                                    <div id="arrowDown" class="col-md-4 col-xs-8" style="text-align: center">
+                                        <span style="font-size: x-large;">Your Adjusted Tax Bracket</span>
                                     </div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-1 col-xs-1"></div>
+                                    <div class="col-md-4 col-xs-2" style="padding-top: 10px">
                                         <b>
-                                            <h2>{{Tax_Bracket_K1 | percent}}</h2>
+                                            <span style="font-size: xx-large;">{{Tax_Bracket_K1 | percent}}</span>
                                         </b>
                                     </div>
                                 </div>
                             </div>
+                            <br>
 
                             <div class="col-md-4" *ngIf="pieChartData1.length > 1">
-                                <canvas baseChart [data]="pieChartData1" [options]="pieChartOption1" [labels]="pieChartLabels1" [colors]="pieChartColor1"
-                                    [chartType]="pieChartType" height="250px"></canvas>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <canvas baseChart [data]="pieChartData1" [options]="pieChartOption1" [labels]="pieChartLabels1" [colors]="pieChartColor1"
+                                            [chartType]="pieChartType" height="175px"></canvas>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-7 col-xs-6">
+                                        Est. After Tax Income
+                                        <i class="glyphicon glyphicon-question-sign" title=""></i>
+                                    </div>
+                                    <div class="col-md-5 col-xs-6">
+                                        <div class="foo silver"></div>{{ Adjusted_Net_Income_K1 | currency:'USD' : true : '1.2-2' }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7 col-xs-6">
+                                        Est. Investment
+                                        <i class="glyphicon glyphicon-question-sign" title=""></i>
+                                    </div>
+                                    <div class="col-md-5 col-xs-6">
+                                        <div class="foo blue"></div>{{ Income_Difference | currency:'USD' : true : '1.2-2' }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7 col-xs-6">
+                                        Est. Tax Savings
+                                        <i class="glyphicon glyphicon-question-sign" title=""></i>
+                                    </div>
+                                    <div class="col-md-5 col-xs-6">
+                                        <div class="foo green"></div>{{ Tax_Savings_K1 | currency:'USD' : true : '1.2-2' }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7 col-xs-6">
+                                        Est. Tax Liability
+                                        <i class="glyphicon glyphicon-question-sign" title=""></i>
+                                    </div>
+                                    <div class="col-md-5 col-xs-6">
+                                        <div class="foo red"></div>{{ Tax_Liability_K1 | currency:'USD' : true : '1.2-2' }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

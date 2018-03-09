@@ -165,11 +165,11 @@ accordion-heading {
 
 
 #arrowUp{
-    margin-left: 15px;
+    margin-left: 0px;
     position:relative;
     background:lightgrey;
     text-align:center;
-    height: 65px;
+    height: 40px;
 }
 #arrowUp:after, #arrowUp:before{
     content:"";
@@ -188,11 +188,11 @@ accordion-heading {
 }
 
 #arrowDown{
-    margin-left: 15px;
+    margin-left: 0px;
     position:relative;
     background:lightgrey;
     text-align:center;
-    height: 90px;
+    height: 70px;
 }
 #arrowDown:after, #arrowDown:before{
     content:"";
@@ -219,4 +219,28 @@ accordion-heading {
 
 .input-group-addon{
     padding: 0px 1px 0px 1px;
+}
+
+.foo {
+    float: left;
+    width: 25px;
+    height: 12px;
+    margin: 5px;
+    border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.red {
+    background: #FF4136;
+}
+  
+.silver {
+    background: #DCDCDC;
+}
+  
+.green {
+    background: #93D454;
+}
+
+.blue{
+    background: #9EC0E3;
 }
