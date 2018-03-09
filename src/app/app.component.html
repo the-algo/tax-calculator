@@ -57,12 +57,13 @@
                                 </div>
 
                                 <div class="row">
-                                    <div id="arrowUp" class="col-md-4 col-xs-8" style="text-align: center">
-                                        <span style="font-size: x-large;">Your Tax Bracket</span>
+                                    <div id="arrowUp" class="col-md-4 col-xs-7" style="text-align: center">
+                                        <span style="font-size: 25px;">Your Tax
+                                            <br> Bracket</span>
                                         <i class="glyphicon glyphicon-question-sign" title=""></i>
                                     </div>
                                     <div class="col-md-1 col-xs-1"></div>
-                                    <div class="col-md-4 col-xs-2">
+                                    <div class="col-md-4 col-xs-3" style="padding-top: 10px">
                                         <b>
                                             <span style="font-size: xx-large;">{{Tax_Bracket | percent}}</span>
                                         </b>
@@ -70,7 +71,7 @@
                                 </div>
                             </div>
                             <br>
-                            <div class="col-md-4" *ngIf="pieChartData.length > 1">
+                            <div class="col-md-4" style="margin-left: -10px" *ngIf="pieChartData.length > 1">
                                 <div class="row">
                                     <div class="col-md-7 col-xs-6">
                                         Est. After Tax Income
@@ -188,11 +189,12 @@
                                 </div>
 
                                 <div class="row">
-                                    <div id="arrowDown" class="col-md-4 col-xs-8" style="text-align: center">
+                                    <div id="arrowDown" class="col-md-4 col-xs-7" style="text-align: center">
                                         <span style="font-size: x-large;">Your Adjusted Tax Bracket</span>
+                                        <i class="glyphicon glyphicon-question-sign" title=""></i>
                                     </div>
                                     <div class="col-md-1 col-xs-1"></div>
-                                    <div class="col-md-4 col-xs-2" style="padding-top: 10px">
+                                    <div class="col-md-4 col-xs-3" style="padding-top: 10px">
                                         <b>
                                             <span style="font-size: xx-large;">{{Tax_Bracket_K1 | percent}}</span>
                                         </b>
@@ -201,7 +203,7 @@
                             </div>
                             <br>
 
-                            <div class="col-md-4" *ngIf="pieChartData1.length > 1">
+                            <div class="col-md-4" style="margin-left: -10px" *ngIf="pieChartData1.length > 1">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <canvas baseChart [data]="pieChartData1" [options]="pieChartOption1" [labels]="pieChartLabels1" [colors]="pieChartColor1"

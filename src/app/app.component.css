@@ -169,7 +169,7 @@ accordion-heading {
     position:relative;
     background:lightgrey;
     text-align:center;
-    height: 40px;
+    min-height: 40px;
 }
 #arrowUp:after, #arrowUp:before{
     content:"";
@@ -192,7 +192,7 @@ accordion-heading {
     position:relative;
     background:lightgrey;
     text-align:center;
-    height: 70px;
+    min-height: 70px;
 }
 #arrowDown:after, #arrowDown:before{
     content:"";
