@@ -31,7 +31,7 @@ export class AppComponent {
 
 
   // 2016 K-1 Tax Estimator section calculation
-  public Estimated_Taxable_Income_model: number = 500000;
+  public Estimated_Taxable_Income_model: number = 0;
   public Investment_Amount_K1_model: number = 0;
   public Filing_Status: number = -1;
   public data = [];
@@ -273,6 +273,7 @@ export class AppComponent {
       animation: {
         duration: 500,
         easing: "easeOutQuart",
+      
         onComplete: function () {
           var ctx = this.chart.ctx;
           Chart.defaults.global.defaultFontSize = 14;

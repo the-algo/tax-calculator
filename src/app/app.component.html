@@ -6,18 +6,22 @@
                     <accordion-heading id="accordion1" (click)="onclicktoggle('accordion1')">
                         <div class="panel-heading">
                             <h2 class="panel-title">
-                                <span id="icon1" class="glyphicon glyphicon-minus"></span> OWS 2018 K-1 Tax Effect
-                            </h2>
+                                <div class="row" id="heading">
+                                    <div class="col-md-6">
+                                        <span id="icon1" class="glyphicon glyphicon-minus"></span> OWS 2017 K-1 Tax Effect Tool
+                                    </div>
+                                   <div class="col-md-6" style="text-align: right;">
+                                         <img src="assets/logo.png" height="45px"> 
+                                   </div>   
+                                </div>                            </h2>
                         </div>
                     </accordion-heading>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-md-9">
+                            <div class="col-md-12">
                                 <h4>Explore the Potential Tax Effect of investing in an oil drilling partnership.</h4>
                             </div>
-                            <div class="col-md-3">
-                                <img src="assets/logo.png" width="200px" />
-                            </div>
+                           
                         </div>
 
                         <br>
@@ -136,7 +140,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        Your Estimated Cost Savings
+                                        <b style="font-size: 18px;">Your Estimated Cost Savings</b>
                                         <span style="color: green; font-size: large; font-weight:bold">
                                             {{ costSaving | percent }} </span>
                                         <i class="glyphicon glyphicon-question-sign" title=""></i>
@@ -190,7 +194,7 @@
 
                                 <div class="row">
                                     <div id="arrowDown" class="col-md-4 col-xs-7" style="text-align: center">
-                                        <span style="font-size: x-large;">Your Adjusted Tax Bracket</span>
+                                        <span style="font-size: 25px;">Your Adjusted Tax Bracket</span>
                                         <i class="glyphicon glyphicon-question-sign" title=""></i>
                                     </div>
                                     <div class="col-md-1 col-xs-1"></div>
